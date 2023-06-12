@@ -10,9 +10,6 @@ let weather = {
         $.get(url, function(data) {
             self.displayWeather(data);
         })
-        .fail(function(error) {
-          console.log("Ошибка запроса:", error);
-        });
     },
 
     fetchForecast: function(city) {
