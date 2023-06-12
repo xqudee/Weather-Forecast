@@ -5,15 +5,22 @@ let weather = {
     apiKey: 'e20f39623c66dea394e1e1148c99e726',
 
     fetchWeather: function(city) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`)
-        .then((response) => response.json())
-        .then((data) => this.displayWeather(data))
+        let self = this;
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`;
+        $.get(url, function(data) {
+            self.displayWeather(data);
+        })
+        .fail(function(error) {
+          console.log("Ошибка запроса:", error);
+        });
     },
 
     fetchForecast: function(city) {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=${daysToShow + 1}&appid=${this.apiKey}`)
-        .then((response) => response.json())
-        .then((data) => this.displayForecast(data))
+        let self = this;
+        let url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=${daysToShow + 1}&appid=${this.apiKey}`;
+        $.get(url, function(data) {
+            self.displayForecast(data);
+        })
     },
 
     displayWeather: function(data) {
@@ -78,6 +85,14 @@ $(".search-button").click(function() {
     city = $(".search-bar").val();
     weather.fetchWeather(city);
     weather.fetchForecast(city);
+})
+
+$(document).keypress(function(event) {
+    if (event.key == 'Enter') {
+        city = $(".search-bar").val();
+        weather.fetchWeather(city);
+        weather.fetchForecast(city);
+    }
 })
 
 function formateTime(time) {
