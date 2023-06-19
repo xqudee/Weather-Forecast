@@ -67,6 +67,7 @@ input:focus {
 
 .icon {
     padding-bottom: 0.5em;
+    max-height: 50px;
 }
 
 .city {
@@ -81,24 +82,6 @@ input:focus {
 
 .weather {
     min-width: 17em;
-}
-
-.weather.not_found::after {
-    content: "Not found.";
-    color: white;
-    visibility: visible;
-    position: absolute;
-    top: 0;
-    left: 20px;
-}
-
-.weather.loading::after {
-    content: "Loading...";
-    color: white;
-    visibility: visible;
-    position: absolute;
-    top: 0;
-    left: 20px;
 }
 
 .flex {

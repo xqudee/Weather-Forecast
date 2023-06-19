@@ -1,5 +1,6 @@
 const daysToShow = 5;
 const cityName = 'Kharkiv'
+const countForecastElements = 6;
 
 let weather = {
     apiKey: 'e20f39623c66dea394e1e1148c99e726',
@@ -27,36 +28,33 @@ let weather = {
         const { speed } = data.wind;
     
         $(".city-val").text(name);
-        $(".icon").attr("src", "https://openweathermap.org/img/wn/"+ icon + ".png");
+        $(".icon").attr("src", "https://openweathermap.org/img/wn/"+ icon + "@4x.png");
         $(".temperature").text(temp + '°C');
         $(".description").text(description);
         $(".humidity-val").text(humidity + "%");
         $(".wind-val").text(speed + " km/h");
 
-        $(".weather").removeClass("loading");
         $("body").css("background-image", "url('https://source.unsplash.com/1600x900/?" + name + "')");
     },
 
     displayForecast: function(data) {
-        console.log(data);
-        var currentDate = data.list[0].dt_txt.split(' ')[0];
         $('.forecast').empty();
-        
-        data.list.forEach(elem => {
-            const time = formateTime(elem.dt_txt);
-            if (elem.dt_txt.split(' ')[0] != currentDate 
-                && time != '00:00') return;
 
-            const { icon, description } = elem.weather[0];
-            const { temp, humidity } = elem.main;
-            const { speed } = elem.wind;
+        let currentDate = data.list[0].dt_txt.split(' ')[0];
+        let countElements = 0;
+
+        data.list.forEach(elem => {
+            if (countElements > countForecastElements) return;
+
+            const time = formateTime(elem.dt_txt);
+            const { icon } = elem.weather[0];
+            const { temp } = elem.main;
 
             let dayElement = document.createElement('div');
             dayElement.classList.add('day');
 
-            let dateElement = document.createElement('h3');
-            dateElement.textContent = time;
-
+            let timeElement = document.createElement('h3');
+            timeElement.textContent = time;
 
             let iconElement = document.createElement('img');
             iconElement.classList.add('weather-icon');
@@ -69,11 +67,12 @@ let weather = {
             let temperature = temp - 273.15;
             temperatureElement.textContent = str + temperature.toFixed(2) + '°C';
 
-            dayElement.appendChild(dateElement);
+            dayElement.appendChild(timeElement);
             dayElement.appendChild(iconElement);
             dayElement.appendChild(temperatureElement);
 
             $('.forecast').append(dayElement);
+            countElements++;
         })
     }
 }
