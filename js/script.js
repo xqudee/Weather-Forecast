@@ -1,5 +1,5 @@
-var city = 'Kharkiv';
-var daysToShow = 5;
+const daysToShow = 5;
+const cityName = 'Kharkiv'
 
 let weather = {
     apiKey: 'e20f39623c66dea394e1e1148c99e726',
@@ -60,7 +60,7 @@ let weather = {
 
             let iconElement = document.createElement('img');
             iconElement.classList.add('weather-icon');
-            iconElement.src = "https://openweathermap.org/img/wn/"+ icon + ".png";
+            iconElement.src = "https://openweathermap.org/img/wn/"+ icon + "@2x.png";
             iconElement.style.width = '100px'
 
             let temperatureElement = document.createElement('p');
@@ -79,14 +79,14 @@ let weather = {
 }
 
 $(".search-button").click(function() {
-    city = $(".search-bar").val();
+    let city = $(".search-bar").val();
     weather.fetchWeather(city);
     weather.fetchForecast(city);
 })
 
 $(document).keypress(function(event) {
     if (event.key == 'Enter') {
-        city = $(".search-bar").val();
+        let city = $(".search-bar").val();
         weather.fetchWeather(city);
         weather.fetchForecast(city);
     }
@@ -98,5 +98,5 @@ function formateTime(time) {
     return str2[0] + ":" + str2[1];
 }
 
-weather.fetchWeather(city);
-weather.fetchForecast(city);
+weather.fetchWeather(cityName);
+weather.fetchForecast(cityName);
