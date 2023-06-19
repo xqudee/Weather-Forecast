@@ -132,3 +132,46 @@ h3 {
 p {
     margin-top: 0;
 }
+
+@media only screen and (max-width: 730px) {
+
+    .card {
+        max-width: 30em;
+    }
+    .main-info {
+        display: block;
+    }
+
+    .weather {
+        text-align: center;
+    }
+
+    .flex {
+        justify-content: center;
+    }
+
+    .forecast-absolute::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        background-color: #7c7c7c3b;
+        width: 80%;
+        height: 0.1em;
+        top: 0;
+        transform: translate(-50%, 0);
+    }
+
+    .forecast {
+        margin-left: 0;
+        margin-top: 2em;
+        justify-content: center;
+    }
+
+    .forecast-container {
+        margin-left: 0;
+    }
+
+    .day {
+        flex-basis: calc(33.33% - 20px);
+    }
+}
