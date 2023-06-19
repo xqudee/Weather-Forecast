@@ -60,7 +60,7 @@ let weather = {
 
             let iconElement = document.createElement('img');
             iconElement.classList.add('weather-icon');
-            iconElement.src = "https://openweathermap.org/img/wn/"+ icon + "@2x.png";
+            iconElement.src = "https://openweathermap.org/img/wn/"+ icon + "@4x.png";
             iconElement.style.width = '100px'
 
             let temperatureElement = document.createElement('p');
